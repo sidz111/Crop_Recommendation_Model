@@ -1,0 +1,151 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('{{ url_for("static", filename='css/farmer1.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(144, 238, 144, 0.8); /* Light green background with transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative; /* Set position to relative for absolute positioning */
+        }
+
+        h2 {
+            font-size: 2.5em; /* Increased font size */
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 18px; /* Increased font size for labels */
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-size: 16px; /* Increased font size for the button */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em; /* Increased font size for the result */
+            text-align: center;
+            color: #333;
+        }
+
+        /* Add styles for names at the bottom right corner */
+        .names {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            text-shadow: 0 1px #000000, 0 1px #000000;
+            background-color: green /* Light green background with transparency */
+            padding: 5px;
+            font-family: serif;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Crop <br> Recommendation</h2>
+        <form id="cropForm">
+            <label for="N">Value of N (Nitrogen):</label>
+            <input type="number" id="N" name="N" required min="0" max="100">
+
+            <label for="P">Value of P (Phosphorus):</label>
+            <input type="number" id="P" name="P" required min="0" max="100">
+
+            <label for="K">Value of K (Potassium):</label>
+            <input type="number" id="K" name="K" required min="0" max="100">
+
+            <label for="humidity">Value of Moisture:</label>
+            <input type="number" id="humidity" name="humidity" required min="0" max="100">
+
+            <button type="button" onclick="predictCrop()">Predict Crop</button>
+
+            <div class="result" id="result"></div>
+
+         
+            
+        </form>
+        
+        <script>
+            function predictCrop() {
+                var value_N = document.getElementById("N").value;
+                var value_P = document.getElementById("P").value;
+                var value_K = document.getElementById("K").value;
+                var value_humidity = document.getElementById("humidity").value;
+        
+                var url = '/predict?N=' + value_N + '&P=' + value_P + '&K=' + value_K + '&humidity=' + value_humidity;
+        
+                // Add loading spinner
+                document.getElementById("result").innerText = "Predicting...";
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("result").innerText = "Predicted Crops: " + data.predicted_crops;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        </script>
+        
+        
+    </div>
+    <div class="names">
+        Developed By:<br>
+        Riddhi Bhavsar <br>
+        Shuddhodhan Surwade <br>
+        Priyanka Padvi
+    </div>
+</body>
+</html>
