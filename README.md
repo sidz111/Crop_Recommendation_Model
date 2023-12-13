@@ -33,7 +33,13 @@ To run the project locally, follow these steps:
     pip install -r requirements.txt
     ```
 
-3. Run the application:
+3. Install additional dependencies:
+
+    ```bash
+    pip install Flask pandas scikit-learn
+    ```
+
+4. Run the application:
 
     ```bash
     python app.py
