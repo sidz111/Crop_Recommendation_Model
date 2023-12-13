@@ -58,9 +58,6 @@ To run the project locally, follow these steps:
 
 If you'd like to contribute to this project, please follow the [contribution guidelines](CONTRIBUTING.md).
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
