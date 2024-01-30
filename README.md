@@ -1,6 +1,8 @@
 # Crop Recommendation System
+![Screenshot (149)](https://github.com/sidz111/Crop_Recommendation_Model/assets/119784108/39f5f8f0-5207-410d-87d4-64c50eaac1f9)
 
-![Project Logo](path/to/your/logo.png)
+
+
 
 ## Overview
 
